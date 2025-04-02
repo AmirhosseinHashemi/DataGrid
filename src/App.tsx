@@ -1,8 +1,10 @@
+import DataGrid from "./assets/DataGrid.tsx";
+
 function App() {
 
     return (
         <div>
-            <h3>Hello</h3>
+            <DataGrid />
         </div>
     )
 }
