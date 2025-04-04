@@ -1,7 +1,11 @@
 import axios from "axios";
 
-export function getRowData() {
-  return axios.get(
-    "https://www.ag-grid.com/example-assets/space-mission-data.json",
-  );
+export async function getRowData() {
+  try {
+    const response = await axios.get("https://fakestoreapi.com/products");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error getting products data");
+  }
 }

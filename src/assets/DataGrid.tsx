@@ -10,20 +10,9 @@ import { AgGridReact } from "ag-grid-react";
 import { useQuery } from "@tanstack/react-query";
 import { getRowData } from "../api/services.ts";
 import { useState } from "react";
+import ActionButtons from "../components/ActionButtons.tsx";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
-
-// Row Data Interface
-// interface IRow {
-//   mission: string;
-//   company: string;
-//   location: string;
-//   date: string;
-//   time: string;
-//   rocket: string;
-//   price: number;
-//   successful: boolean;
-// }
 
 // Create new DataGrid component
 const DataGrid = () => {
@@ -32,71 +21,40 @@ const DataGrid = () => {
     queryFn: getRowData,
   });
 
-  const CompanyLogoRenderer = ({ value }) => (
-    <span
-      style={{
-        display: "flex",
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-      }}
-    >
-      {value && (
-        <img
-          alt={`${value} Flag`}
-          src={`https://www.ag-grid.com/example-assets/space-company-logos/${value.toLowerCase()}.png`}
-          style={{
-            display: "block",
-            width: "25px",
-            height: "auto",
-            maxHeight: "50%",
-            marginRight: "12px",
-            filter: "brightness(1.1)",
-          }}
-        />
-      )}
-      <p
-        style={{
-          textOverflow: "ellipsis",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-        }}
-      >
-        {value}
-      </p>
-    </span>
-  );
+  if (error) return <h3>{error.message}</h3>;
 
   const rowSelection: RowSelectionOptions = {
     mode: "multiRow",
     // headerCheckbox: false,
   };
 
-  const rowClass = "my-green-class";
-  const getRowClass = (params) => {
-    if (params.node.rowIndex % 2 === 0) {
-      return "bg-green-300";
-    }
-  };
-
   // Column Definitions: Defines & controls grid columns.
   const [colDefs] = useState<ColDef[]>([
-    { field: "mission", editable: true },
+    { field: "id" },
     {
-      field: "company",
+      field: "title",
       filter: true,
-      cellRenderer: CompanyLogoRenderer,
     },
-    { field: "location" },
-    { field: "date" },
+    { field: "description" },
+    { field: "category" },
     {
       field: "price",
       valueFormatter: (params) => {
         return new Intl.NumberFormat("en").format(params.value);
       },
     },
-    { field: "successful" },
-    { field: "rocket" },
+    {
+      colId: "actions",
+      headerName: "Actions",
+      cellRenderer: ActionButtons,
+      cellRendererParams: (params: any) => ({
+        rowData: params.data, // ارسال داده‌های ردیف به کامپوننت ActionButtons
+      }),
+      cellStyle: {
+        display: "flex",
+        "align-items": "center",
+      },
+    },
   ]);
 
   if (isLoading) {
@@ -119,8 +77,6 @@ const DataGrid = () => {
         rowData={data?.data}
         loading={isLoading}
         columnDefs={colDefs}
-        rowClass={rowClass}
-        getRowClass={getRowClass}
       />
     </div>
   );
