@@ -1,4 +1,17 @@
-function ActionButtons({rowData}) {
+interface rowData {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
+  image: string;
+  rating: {
+    rate: number;
+    count: number;
+  };
+}
+
+function ActionButtons({rowData}: {rowData: rowData}) {
   const handleUpdate = () => {
     console.log("Updating:", rowData);
   };
@@ -9,7 +22,10 @@ function ActionButtons({rowData}) {
 
   return (
     <div className="flex items-center gap-2">
-      <button onClick={handleDelete} className="cursor-pointer bg-gray-100 rounded-xs p-1">
+      <button
+        onClick={handleDelete}
+        className="cursor-pointer bg-gray-100 rounded-xs p-1"
+      >
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +44,10 @@ function ActionButtons({rowData}) {
         </span>
       </button>
 
-      <button onClick={handleUpdate} className="cursor-pointer bg-gray-100 rounded-xs p-1">
+      <button
+        onClick={handleUpdate}
+        className="cursor-pointer bg-gray-100 rounded-xs p-1"
+      >
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"

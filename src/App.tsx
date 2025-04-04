@@ -1,4 +1,4 @@
-import DataGrid from "./assets/DataGrid.tsx";
+import DataGrid from "./components/DataGrid.tsx";
 
 function App() {
 

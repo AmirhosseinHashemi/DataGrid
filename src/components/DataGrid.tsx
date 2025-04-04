@@ -10,7 +10,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useQuery } from "@tanstack/react-query";
 import { getRowData } from "../api/services.ts";
 import { useState } from "react";
-import ActionButtons from "../components/ActionButtons.tsx";
+import ActionButtons from "./ActionButtons.tsx";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -52,7 +52,7 @@ const DataGrid = () => {
       }),
       cellStyle: {
         display: "flex",
-        "align-items": "center",
+        "alignItems": "center",
       },
     },
   ]);
@@ -74,7 +74,7 @@ const DataGrid = () => {
         }
         rowSelection={rowSelection}
         pagination
-        rowData={data?.data}
+        rowData={data}
         loading={isLoading}
         columnDefs={colDefs}
       />
