@@ -52,7 +52,7 @@ const DataGrid = () => {
       }),
       cellStyle: {
         display: "flex",
-        "alignItems": "center",
+        alignItems: "center",
       },
     },
   ]);
@@ -81,5 +81,7 @@ const DataGrid = () => {
     </div>
   );
 };
+
+// add feat 2
 
 export default DataGrid;

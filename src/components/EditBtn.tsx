@@ -59,6 +59,7 @@ function EditBtn({ rowId }: { rowId: number }) {
     mutation.mutate(updatedRows[0]);
   };
 
+  // change button style
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger className="cursor-pointer">
